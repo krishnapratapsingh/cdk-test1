@@ -13,7 +13,7 @@ export class MyPipelineStack extends cdk.Stack {
         commands: ['npm ci', 'npm run build', 'npx cdk synth']
       })
     });
-    pipeline.addApplicationStage(new MyPipelineAppStage(this, "test", {
+    pipeline.addStage(new MyPipelineAppStage(this, "test", {
       env: { account: "637791486797", region: "us-east-1" }
     }));
   }
