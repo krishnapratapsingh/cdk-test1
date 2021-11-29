@@ -1,5 +1,6 @@
 import * as cdk from '@aws-cdk/core';
 import { CodePipeline, CodePipelineSource, ShellStep } from '@aws-cdk/pipelines';
+import { MyPipelineAppStage } from './my-pipeline-app-stage'
 
 export class MyPipelineStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -12,5 +13,8 @@ export class MyPipelineStack extends cdk.Stack {
         commands: ['npm ci', 'npm run build', 'npx cdk synth']
       })
     });
+    pipeline.addStage(new MyPipelineAppStage(this, "test", {
+      env: { account: "637791486797", region: "us-east-1" }
+    }));
   }
 }
